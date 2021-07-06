@@ -9,7 +9,8 @@ import (
 
 // Get does HTTP GET request
 func Get(ctx context.Context, URL *string, query map[string]string, header map[string]string, reqBody *[]byte, resBody interface{}) {
+	var reqUrl = helper.MakeSortedURL(URL, query)
 	var method = mime.Get
-	resBytes := Request(ctx, &method, URL, header, reqBody)
+	resBytes := Request(ctx, reqUrl, &method, header, reqBody)
 	helper.BytesToStruct(*resBytes, resBody)
 }

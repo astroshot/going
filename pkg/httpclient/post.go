@@ -17,7 +17,7 @@ func PostJSON(ctx context.Context, URL *string, query map[string]string, header 
 	}
 
 	var method = mime.Post
-	resBytes := Request(ctx, &method, reqUrl, header, jsonBytes)
+	resBytes := Request(ctx, reqUrl, &method, header, jsonBytes)
 	helper.BytesToStruct(*resBytes, resBody)
 }
 
@@ -32,6 +32,6 @@ func PostForm(ctx context.Context, URL *string, query map[string]string, header 
 
 	header[mime.ContentType] = mime.AppXForm
 	var method = mime.Post
-	resBytes := Request(ctx, &method, reqUrl, header, &formBytes)
+	resBytes := Request(ctx, reqUrl, &method, header, &formBytes)
 	helper.BytesToStruct(*resBytes, resBody)
 }
