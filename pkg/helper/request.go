@@ -52,7 +52,7 @@ func MakeURL(URL *string, query map[string]string) *string {
 
 func MakeSortedURL(URL *string, query map[string]string) *string {
 	queryParams := MakeSortedForm(query)
-	if query == nil || len(query) < 1 {
+	if queryParams == nil {
 		return URL
 	}
 

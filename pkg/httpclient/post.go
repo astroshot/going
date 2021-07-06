@@ -9,6 +9,7 @@ import (
 
 // PostJSON do HTTP Post method, with JSON body
 func PostJSON(ctx context.Context, URL *string, query map[string]string, header map[string]string, reqBody interface{}, resBody interface{}) {
+	reqUrl := helper.MakeSortedURL(URL, query)
 	jsonBytes := helper.ToJSONBytes(reqBody)
 	if header == nil {
 		header = make(map[string]string)
@@ -16,7 +17,7 @@ func PostJSON(ctx context.Context, URL *string, query map[string]string, header 
 	}
 
 	var method = mime.Post
-	resBytes := Request(ctx, &method, URL, header, jsonBytes)
+	resBytes := Request(ctx, &method, reqUrl, header, jsonBytes)
 	helper.BytesToStruct(*resBytes, resBody)
 }
 
