@@ -2,15 +2,20 @@ package httpclient
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 )
 
-func Request(url *string, method *string, header map[string]string, body *[]byte) *[]byte {
-	client := &http.Client{}
+// Request does basic HTTP Request
+func Request(ctx context.Context, url *string, method *string, header map[string]string, body *[]byte) *[]byte {
+	if ctx == nil {
+		ctx = context.Background()
+	}
 
+	client := &http.Client{}
 	reqBody := bytes.NewBuffer(*body)
-	req, err := http.NewRequest(*method, *url, reqBody)
+	req, err := http.NewRequestWithContext(ctx, *method, *url, reqBody)
 	if err != nil {
 		panic(err)
 	}
