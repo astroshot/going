@@ -3,8 +3,8 @@ package httpclient
 import (
 	"context"
 
-	"github.com/astroshot/going/pkg/helper"
-	"github.com/astroshot/going/pkg/mime"
+	"github.com/astroshot/going/helper"
+	"github.com/astroshot/going/mime"
 )
 
 // PostJSON do HTTP Post method, with JSON body
